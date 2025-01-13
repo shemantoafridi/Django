@@ -1,0 +1,31 @@
+<!-- store/templates/store/home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-Commerce</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file here -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our E-Commerce Site</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'product_list' %}">View Products</a></li>
+                <li><a href="{% url 'cart_detail' %}">View Cart</a></li>
+                <li><a href="{% url 'checkout' %}">Checkout</a></li>
+                <li><a href="{% url 'order_success' %}">Order Success</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Your One-Stop Shop for Everything!</h2>
+        <p>Browse our selection of products and enjoy a seamless shopping experience.</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 E-Commerce Site</p>
+    </footer>
+</body>
+</html>

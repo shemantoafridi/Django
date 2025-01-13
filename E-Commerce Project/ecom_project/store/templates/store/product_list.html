@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+    <h1>Product List</h1>
+    <a href="{% url 'add_product' %}">Add New Product</a>  <!-- Link to the add product page -->
+    <ul>
+        {% for product in products %}
+            <li>
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                <p>Stock: {{ product.stock }}</p>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100px;height:auto;"> <!-- Image display -->
+                <a href="{% url 'product_detail' product.id %}">View Details</a>
+            </li>
+        {% empty %}
+            <li>No products available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
