@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Seafood Store{% endblock %}
+
+{% block content %}
+<h1>Our Products</h1>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for product in products %}
+    <div style="flex: 1 1 calc(25% - 20px); box-sizing: border-box; text-align: center; padding: 10px; border: 1px solid #ddd;">
+        {% if product.image %}
+        <!-- Display image with 92x92 dimensions -->
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100px; height: 100px; object-fit: cover; margin-bottom: 10px;">
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>Price: {{ product.price }} Taka (per kg)</p>
+        <form action="{% url 'product_detail' product.id %}" method="get">
+            <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold;">
+                View Details
+            </button>
+        </form>
+        
+       
+        <!-- Add to Cart button -->
+        <form action="{% url 'add_to_cart' product.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn" style="background-color: #28a745; color: white; padding: 5px 10px;">
+            Add to Cart
+        </button>
+        </form> 
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

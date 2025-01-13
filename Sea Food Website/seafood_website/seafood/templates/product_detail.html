@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Seafood Store{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">{{ product.name }}</h1>
+<div class="row mt-4">
+    <div class="col-md-6">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 200px; height: 200px;">
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <p>Price: {{ product.price }} Taka (per kg)</p>
+        <p>{{ product.description }}</p>
+       
+    </div>
+    <div>
+     <!-- Add to Cart button -->
+     <form action="{% url 'add_to_cart' product.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn" style="background-color: #28a745; color: white; padding: 5px 10px;">
+            Add to Cart
+        </button>
+     </form>
+    </div>
+
+</div>
+{% endblock %}
