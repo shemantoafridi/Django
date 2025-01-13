@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ToDo List with Django</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body style="background-color: #eeec98;">
+
+<div class="container text-center">
+    <h1><b>ToDo List - Home</b></h1>
+    <a href="{% url 'create_todo' %}" class="btn btn-primary mt-4">Add Task</a>
+    <a href="{% url 'view_task' %}" class="btn btn-secondary mt-4">View Tasks</a>
+</div>
+
+</body>
+</html>
