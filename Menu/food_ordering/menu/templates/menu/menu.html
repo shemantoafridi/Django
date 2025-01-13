@@ -1,0 +1,22 @@
+{% extends 'menu/base.html' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+    <h1 style= "text-align: center">Food Menu</h1>
+       
+    <table border="5" cellspacing="0" cellpadding="10" text-align="center" width="80%" align="center" >
+        <tr>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Unit</th>
+        </tr>
+        {% for item in menu_items %}
+        <tr style= "text-align: center">
+            <td>{{item.name}}</td>
+            <td>{{item.price}} Taka</td>
+            <td>Per {{item.unit}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

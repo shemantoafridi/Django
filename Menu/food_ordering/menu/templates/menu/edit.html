@@ -1,0 +1,41 @@
+{% extends 'menu/base.html' %}
+{% block content %}
+<center>
+    <h1>Edit Order</h1>
+    <form method="post">
+        {% csrf_token %}
+        <table border="1" cellpadding="10" cellspacing="0" style="margin: 20px auto; border-collapse: collapse; width: 60%;">
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: left; padding: 10px; background-color: #f0f0f0;">
+                        Customer Name:
+                        <input type="text" name="customer_name" value="{{ order.customer_name }}" style="width: 90%; padding: 5px;" />
+                    </th>
+                </tr>
+                <tr>
+                    <th>Food Item</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.orderitem_set.all %}
+                <tr>
+                    <td>{{ item.menu_item.name }}</td>
+                    <td>
+                        <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="0" style="width: 80px;" />
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="margin-top: 15px;">
+            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Save Changes
+            </button>
+            <a href="{% url 'manage_orders' %}" style="margin-left: 15px; text-decoration: none; color: #555;">
+                Back to Orders
+            </a>
+        </div>
+    </form>
+</center>
+{% endblock %}

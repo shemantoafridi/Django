@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Page</title>
+</head>
+{% extends 'menu/base.html' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<body>
+    <h1 style="text-align: center;">Customer Bills</h1>
+    <table border="5" cellspacing="0" cellpadding="10" text-align="center" width="80%" align="center">
+        <tr>
+            <th>Customer Name</th>
+            <th>Ordered Items</th>
+            <th>Bill (for each item)</th>
+            <th>Total Bill</th>
+            <th>Action</th>
+            <th>Status</th>
+            
+        </tr>
+        {% for bill in bill_data %}
+        <tr style="text-align: center;">
+            <td>{{ bill.customer_name }}</td>            
+            <td style="text-align: justify;">
+                <ul>
+                    {% for item in bill.items %}
+                    <li>
+                        {{ item.name }}: {{ item.quantity }} {{ item.unit }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td style="text-align: justify;">
+                <ul>
+                    {% for item in bill.items %}
+                    <li>{{ item.price }} X {{ item.quantity }} = {{ item.amount }} Taka</li>  <!-- Show each item's bill -->
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ bill.total_amount }} Taka</td>  <!-- Show total bill for the customer -->
+
+            <td>
+                <form method="POST" action="{% url 'payment' bill.id %}">
+                    {% csrf_token %}
+                    <button type="submit" name="status" value="Paid" style="color: green;">Mark as Paid</button>
+                    <button type="submit" name="status" value="Unpaid" style="color: red;">Mark as Unpaid</button>
+                </form>
+            </td>
+            
+            <td>
+                {% if bill.status == 'Paid'%}
+                    <span style="color: green;">Paid</span>
+                {% else %}
+                    <span style="color: red;">Unpaid</span>
+                {% endif %}
+            </td>
+            
+           
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+{% endblock %}
+</html>

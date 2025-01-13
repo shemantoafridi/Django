@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+</head>
+
+{% extends 'menu/base.html' %}
+
+{% block title %}Menu{% endblock %}
+    
+{% block content %}    
+
+
+<body>
+    <h1 style="text-align: center;">Place Your Order</h1>
+    <div style="text-align: right;">
+        <button class="btn btn-primary" onclick="location.href='{% url 'manage_orders' %}'" style="color: blueviolet;">View Orders</button>
+    </div>
+    
+    <form method="POST" style="text-align: center;">
+        {% csrf_token %}
+        <div class="customer-name-container">
+            <label for="customer_name">Customer Name:</label>
+            <input type="text" id="customer_name" name="customer_name" required>
+        </div>
+        <h2 style= "text-align: center">Menu</h2>
+        <table border="5" cellspacing="0" cellpadding="10" text-align="center" align="center" width="80%">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            {% for item in menu_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }} Taka</td>
+                <td>
+                    <input type="number" name="item_{{ item.id }}" min="0" placeholder="Quantity" style="text-align: center;">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" style="margin-top: 20px; color: #2c0aee;">Place Order</button>
+    </form>
+    <br>
+       
+</body>
+{% endblock %}
+</html>
